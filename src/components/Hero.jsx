@@ -9,6 +9,7 @@ const Hero = () => {
         { id: 'airport', label: 'Airport Transfer' },
         { id: 'outstation', label: 'Outstation' },
         { id: 'local', label: 'Local City' },
+        { id: 'rental', label: 'Rental Car' },
     ];
 
     return (
@@ -60,12 +61,12 @@ const Hero = () => {
                     className="glass-card p-6 md:p-8 relative shadow-2xl shadow-slate-200/50"
                 >
                     {/* Tabs */}
-                    <div className="flex gap-2 p-1.5 bg-slate-100 rounded-xl mb-8">
+                    <div className="grid grid-cols-2 md:grid-cols-4 gap-2 p-1.5 bg-slate-100 rounded-xl mb-8">
                         {tabs.map((tab) => (
                             <button
                                 key={tab.id}
                                 onClick={() => setActiveTab(tab.id)}
-                                className={`flex-1 py-3 text-sm font-semibold rounded-lg transition-all ${activeTab === tab.id ? 'bg-white text-accent shadow-sm' : 'text-slate-500 hover:text-slate-900 hover:bg-white/50'}`}
+                                className={`py-3 text-sm font-semibold rounded-lg transition-all ${activeTab === tab.id ? 'bg-white text-accent shadow-sm' : 'text-slate-500 hover:text-slate-900 hover:bg-white/50'}`}
                             >
                                 {tab.label}
                             </button>

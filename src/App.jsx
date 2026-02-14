@@ -2,6 +2,7 @@ import React from 'react';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import Services from './components/Services';
+import FloatingActions from './components/FloatingActions';
 import { motion } from 'framer-motion';
 import { Award, Shield, Heart, Map, Car } from 'lucide-react';
 
@@ -137,6 +138,7 @@ function App() {
       <Hero />
       <Services />
       <AboutPreview />
+      <FloatingActions />
 
       {/* Short Stats Section */}
       <section id="stats" className="py-20 bg-accent text-white">
