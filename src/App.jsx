@@ -3,64 +3,64 @@ import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import Services from './components/Services';
 import { motion } from 'framer-motion';
-import { Award, Shield, Heart, Map } from 'lucide-react';
+import { Award, Shield, Heart, Map, Car } from 'lucide-react';
 
 const Footer = () => (
-  <footer className="bg-primary pt-20 pb-10 border-t border-white/5">
-    <div className="container mx-auto px-4 md:px-8 grid md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
+  <footer id="contact" className="bg-slate-50 pt-20 pb-10 border-t border-slate-100">
+    <div className="container mx-auto px-4 md:px-8 grid md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16 text-slate-600">
       <div className="space-y-6">
         <div className="flex items-center gap-2">
-          <div className="p-1.5 bg-accent rounded text-primary">
-            <Map size={24} />
+          <div className="p-2 bg-accent rounded-lg text-white shadow-md shadow-accent/20">
+            <Car size={24} />
           </div>
-          <span className="text-2xl font-bold font-outfit">Anshu<span className="text-accent">Travels</span></span>
+          <span className="text-2xl font-bold font-outfit text-slate-900">Anshu<span className="text-accent">Travels</span></span>
         </div>
-        <p className="text-slate-400 leading-relaxed">
+        <p className="leading-relaxed">
           Providing premium taxi and travel services since 1988. Committed to punctuality, safety, and your comfort.
         </p>
       </div>
 
       <div>
-        <h4 className="text-lg font-bold mb-6">Quick Links</h4>
-        <ul className="space-y-4 text-slate-400">
-          <li><a href="#" className="hover:text-accent transition-colors">About Us</a></li>
-          <li><a href="#" className="hover:text-accent transition-colors">Our Fleet</a></li>
-          <li><a href="#" className="hover:text-accent transition-colors">Routes & Pricing</a></li>
-          <li><a href="#" className="hover:text-accent transition-colors">Contact Us</a></li>
+        <h4 className="text-lg font-bold mb-6 text-slate-900">Quick Links</h4>
+        <ul className="space-y-4">
+          <li><a href="#about" className="hover:text-accent transition-colors">About Us</a></li>
+          <li><a href="#services" className="hover:text-accent transition-colors">Our Fleet</a></li>
+          <li><a href="#stats" className="hover:text-accent transition-colors">Routes & Pricing</a></li>
+          <li><a href="#contact" className="hover:text-accent transition-colors">Contact Us</a></li>
         </ul>
       </div>
 
       <div>
-        <h4 className="text-lg font-bold mb-6">Services</h4>
-        <ul className="space-y-4 text-slate-400">
-          <li><a href="#" className="hover:text-accent transition-colors">Airport Transfers</a></li>
-          <li><a href="#" className="hover:text-accent transition-colors">Outstation Trips</a></li>
-          <li><a href="#" className="hover:text-accent transition-colors">Shared Cabs</a></li>
-          <li><a href="#" className="hover:text-accent transition-colors">Corporate Travel</a></li>
+        <h4 className="text-lg font-bold mb-6 text-slate-900">Services</h4>
+        <ul className="space-y-4">
+          <li><a href="#services" className="hover:text-accent transition-colors">Airport Transfers</a></li>
+          <li><a href="#services" className="hover:text-accent transition-colors">Outstation Trips</a></li>
+          <li><a href="#services" className="hover:text-accent transition-colors">Shared Cabs</a></li>
+          <li><a href="#services" className="hover:text-accent transition-colors">Corporate Travel</a></li>
         </ul>
       </div>
 
       <div>
-        <h4 className="text-lg font-bold mb-6">Contact Info</h4>
-        <ul className="space-y-4 text-slate-400">
+        <h4 className="text-lg font-bold mb-6 text-slate-900">Contact Info</h4>
+        <ul className="space-y-4">
           <li className="flex items-start gap-3">
-            <span className="text-accent italic font-bold">A:</span> Pune-Mumbai Highway, Station Road, Pune.
+            <span className="text-blue-600 font-bold">A:</span> Pune-Mumbai Highway, Station Road, Pune.
           </li>
           <li className="flex items-start gap-3">
-            <span className="text-accent italic font-bold">P:</span> +91 98811 00000
+            <span className="text-blue-600 font-bold">P:</span> +91 70615 13811
           </li>
           <li className="flex items-start gap-3">
-            <span className="text-accent italic font-bold">E:</span> info@anshutils.com
+            <span className="text-blue-600 font-bold">E:</span> info@anshutils.com
           </li>
         </ul>
       </div>
     </div>
 
-    <div className="container mx-auto px-8 pt-10 border-t border-white/5 flex flex-col md:row justify-between items-center gap-4 text-slate-500 text-sm">
+    <div className="container mx-auto px-8 pt-10 border-t border-slate-200 flex flex-col md:flex-row justify-between items-center gap-4 text-slate-400 text-sm">
       <p>© 2025 Anshu Travels. All rights reserved.</p>
       <div className="flex gap-6">
-        <a href="#" className="hover:text-white">Privacy Policy</a>
-        <a href="#" className="hover:text-white">Terms of Service</a>
+        <a href="#" className="hover:text-accent transition-colors">Privacy Policy</a>
+        <a href="#" className="hover:text-accent transition-colors">Terms of Service</a>
       </div>
     </div>
   </footer>
@@ -139,7 +139,7 @@ function App() {
       <AboutPreview />
 
       {/* Short Stats Section */}
-      <section className="py-20 bg-accent text-primary">
+      <section id="stats" className="py-20 bg-accent text-white">
         <div className="container mx-auto px-8 grid grid-cols-2 lg:grid-cols-4 gap-8">
           <div className="text-center">
             <div className="text-5xl font-bold mb-2">5L+</div>

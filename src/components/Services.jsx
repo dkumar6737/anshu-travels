@@ -42,15 +42,22 @@ const services = [
 ];
 
 const Services = () => {
+    const scrollToHero = () => {
+        const heroSection = document.getElementById('hero');
+        if (heroSection) {
+            heroSection.scrollIntoView({ behavior: 'smooth' });
+        }
+    };
+
     return (
-        <section id="services" className="py-24 bg-secondary/30">
+        <section id="services" className="py-24 bg-slate-50/50">
             <div className="container mx-auto px-4 md:px-8">
                 <div className="text-center mb-16">
                     <motion.h2
                         initial={{ opacity: 0, y: 20 }}
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
-                        className="text-4xl md:text-5xl font-bold mb-4"
+                        className="text-4xl md:text-5xl font-bold mb-4 text-slate-900"
                     >
                         Our Exclusive <span className="text-accent">Services</span>
                     </motion.h2>
@@ -59,7 +66,7 @@ const Services = () => {
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
                         transition={{ delay: 0.1 }}
-                        className="text-slate-400 max-w-2xl mx-auto"
+                        className="text-slate-600 max-w-2xl mx-auto font-medium"
                     >
                         We offer a wide range of travel services designed for comfort, safety, and reliability.
                     </motion.p>
@@ -74,19 +81,28 @@ const Services = () => {
                             viewport={{ once: true }}
                             transition={{ delay: index * 0.1 }}
                             whileHover={{ y: -10 }}
-                            className="glass-card p-8 group hover:border-accent/50 transition-all duration-300"
+                            className="glass-card p-8 group hover:border-accent/30 transition-all duration-300 flex flex-col h-full bg-white shadow-sm"
                         >
-                            <div className={`w-20 h-20 rounded-2xl flex items-center justify-center mb-6 transition-transform group-hover:scale-110 duration-300 ${service.color}`}>
+                            <div className={`w-20 h-20 rounded-2xl flex items-center justify-center mb-6 transition-transform group-hover:scale-110 duration-300 ${service.color} shadow-sm`}>
                                 {service.icon}
                             </div>
-                            <h3 className="text-2xl font-bold mb-3">{service.title}</h3>
-                            <p className="text-slate-400 leading-relaxed mb-6">
+                            <h3 className="text-2xl font-bold mb-3 text-slate-900">{service.title}</h3>
+                            <p className="text-slate-600 leading-relaxed mb-8 flex-grow font-medium">
                                 {service.description}
                             </p>
-                            <button className="flex items-center gap-2 font-bold text-accent group-hover:gap-3 transition-all">
-                                Learn More
-                                <ChevronRight size={18} />
-                            </button>
+
+                            <div className="flex items-center justify-between mt-auto pt-4 border-t border-slate-100">
+                                <button
+                                    onClick={scrollToHero}
+                                    className="px-6 py-2.5 bg-accent text-white font-bold rounded-lg text-sm hover:bg-blue-700 transition-all active:scale-95 shadow-lg shadow-accent/20"
+                                >
+                                    Book Now
+                                </button>
+                                <button className="flex items-center gap-1.5 font-bold text-slate-400 hover:text-accent text-sm transition-all group/btn">
+                                    Learn More
+                                    <ChevronRight size={16} className="group-hover/btn:translate-x-1 transition-transform" />
+                                </button>
+                            </div>
                         </motion.div>
                     ))}
                 </div>
