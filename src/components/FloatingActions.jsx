@@ -94,7 +94,7 @@ const FloatingActions = () => {
 
                 {/* Floating Label for Closed State */}
                 {!isOpen && (
-                    <span className="absolute right-18 bg-accent text-white px-4 py-2 rounded-xl text-sm font-bold shadow-xl whitespace-nowrap hidden md:block animate-bounce">
+                    <span className="absolute right-18 bg-accent text-white px-4 py-2 rounded-xl text-sm font-bold shadow-xl whitespace-nowrap hidden md:block">
                         Contact Us
                     </span>
                 )}

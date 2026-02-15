@@ -1,7 +1,8 @@
-import React from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import Services from './components/Services';
+import Pricing from './components/Pricing';
 import FloatingActions from './components/FloatingActions';
 import { motion } from 'framer-motion';
 import { Award, Shield, Heart, Map, Car } from 'lucide-react';
@@ -24,20 +25,20 @@ const Footer = () => (
       <div>
         <h4 className="text-lg font-bold mb-6 text-slate-900">Quick Links</h4>
         <ul className="space-y-4">
-          <li><a href="#about" className="hover:text-accent transition-colors">About Us</a></li>
-          <li><a href="#services" className="hover:text-accent transition-colors">Our Fleet</a></li>
-          <li><a href="#stats" className="hover:text-accent transition-colors">Routes & Pricing</a></li>
-          <li><a href="#contact" className="hover:text-accent transition-colors">Contact Us</a></li>
+          <li><a href="/#about" className="hover:text-accent transition-colors">About Us</a></li>
+          <li><a href="/#services" className="hover:text-accent transition-colors">Our Fleet</a></li>
+          <li><a href="/pricing" className="hover:text-accent transition-colors">Routes & Pricing</a></li>
+          <li><a href="/#contact" className="hover:text-accent transition-colors">Contact Us</a></li>
         </ul>
       </div>
 
       <div>
         <h4 className="text-lg font-bold mb-6 text-slate-900">Services</h4>
         <ul className="space-y-4">
-          <li><a href="#services" className="hover:text-accent transition-colors">Airport Transfers</a></li>
-          <li><a href="#services" className="hover:text-accent transition-colors">Outstation Trips</a></li>
-          <li><a href="#services" className="hover:text-accent transition-colors">Shared Cabs</a></li>
-          <li><a href="#services" className="hover:text-accent transition-colors">Corporate Travel</a></li>
+          <li><a href="/#services" className="hover:text-accent transition-colors">Airport Transfers</a></li>
+          <li><a href="/#services" className="hover:text-accent transition-colors">Outstation Trips</a></li>
+          <li><a href="/#services" className="hover:text-accent transition-colors">Shared Cabs</a></li>
+          <li><a href="/#services" className="hover:text-accent transition-colors">Corporate Travel</a></li>
         </ul>
       </div>
 
@@ -68,7 +69,8 @@ const Footer = () => (
 );
 
 const AboutPreview = () => (
-  <section id="about" className="py-24 relative overflow-hidden">
+  /* ... content omitted for brevity, keeping same as before ... */
+  <section id="about" className="py-24 relative">
     <div className="container mx-auto px-4 md:px-8 grid lg:grid-cols-2 gap-16 items-center">
       <motion.div
         initial={{ opacity: 0, x: -50 }}
@@ -131,39 +133,47 @@ const ChevronRight = ({ size, className }) => (
   </svg>
 );
 
+const Home = () => (
+  <>
+    <Hero />
+    <Services />
+    <AboutPreview />
+    <section id="stats" className="py-20 bg-accent text-white">
+      <div className="container mx-auto px-8 grid grid-cols-2 lg:grid-cols-4 gap-8">
+        <div className="text-center text-white">
+          <div className="text-5xl font-bold mb-2">5L+</div>
+          <p className="font-semibold uppercase text-xs tracking-widest opacity-70">Happy Clients</p>
+        </div>
+        <div className="text-center text-white">
+          <div className="text-5xl font-bold mb-2">150+</div>
+          <p className="font-semibold uppercase text-xs tracking-widest opacity-70">Own Fleet</p>
+        </div>
+        <div className="text-center text-white">
+          <div className="text-5xl font-bold mb-2">37+</div>
+          <p className="font-semibold uppercase text-xs tracking-widest opacity-70">Awards Won</p>
+        </div>
+        <div className="text-center text-white">
+          <div className="text-5xl font-bold mb-2">24/7</div>
+          <p className="font-semibold uppercase text-xs tracking-widest opacity-70">Instant Support</p>
+        </div>
+      </div>
+    </section>
+  </>
+);
+
 function App() {
   return (
-    <div className="min-h-screen">
-      <Navbar />
-      <Hero />
-      <Services />
-      <AboutPreview />
-      <FloatingActions />
-
-      {/* Short Stats Section */}
-      <section id="stats" className="py-20 bg-accent text-white">
-        <div className="container mx-auto px-8 grid grid-cols-2 lg:grid-cols-4 gap-8">
-          <div className="text-center">
-            <div className="text-5xl font-bold mb-2">5L+</div>
-            <p className="font-semibold uppercase text-xs tracking-widest opacity-70">Happy Clients</p>
-          </div>
-          <div className="text-center">
-            <div className="text-5xl font-bold mb-2">150+</div>
-            <p className="font-semibold uppercase text-xs tracking-widest opacity-70">Own Fleet</p>
-          </div>
-          <div className="text-center">
-            <div className="text-5xl font-bold mb-2">37+</div>
-            <p className="font-semibold uppercase text-xs tracking-widest opacity-70">Awards Won</p>
-          </div>
-          <div className="text-center">
-            <div className="text-5xl font-bold mb-2">24/7</div>
-            <p className="font-semibold uppercase text-xs tracking-widest opacity-70">Instant Support</p>
-          </div>
-        </div>
-      </section>
-
-      <Footer />
-    </div>
+    <Router>
+      <div className="min-h-screen">
+        <Navbar />
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/pricing" element={<Pricing />} />
+        </Routes>
+        <Footer />
+        <FloatingActions />
+      </div>
+    </Router>
   );
 }
 

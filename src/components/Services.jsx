@@ -43,10 +43,11 @@ const services = [
 
 const Services = () => {
     const scrollToHero = () => {
-        const heroSection = document.getElementById('hero');
-        if (heroSection) {
-            heroSection.scrollIntoView({ behavior: 'smooth' });
-        }
+        // const heroSection = document.getElementById('hero');
+        // if (heroSection) {
+        //     heroSection.scrollIntoView({ behavior: 'smooth' });
+        // }
+        window.location.href = "/pricing";
     };
 
     return (
@@ -80,8 +81,7 @@ const Services = () => {
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true }}
                             transition={{ delay: index * 0.1 }}
-                            whileHover={{ y: -10 }}
-                            className="glass-card p-8 group hover:border-accent/30 transition-all duration-300 flex flex-col h-full bg-white shadow-sm"
+                            className="glass-card p-8 group hover:-translate-y-2 transition-all duration-300 flex flex-col h-full bg-white shadow-sm"
                         >
                             <div className={`w-20 h-20 rounded-2xl flex items-center justify-center mb-6 transition-transform group-hover:scale-110 duration-300 ${service.color} shadow-sm`}>
                                 {service.icon}

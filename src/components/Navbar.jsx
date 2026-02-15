@@ -1,54 +1,75 @@
 import React, { useState, useEffect } from 'react';
 import { Car, Menu, X, Phone } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 
 const Navbar = () => {
     const [isScrolled, setIsScrolled] = useState(false);
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+    const navigate = useNavigate();
+    const location = useLocation();
 
     useEffect(() => {
         const handleScroll = () => {
-            setIsScrolled(window.scrollY > 20);
+            const currentScrollY = window.scrollY;
+            setIsScrolled(currentScrollY > 5);
         };
-        window.addEventListener('scroll', handleScroll);
+
+        // Initial check
+        handleScroll();
+
+        window.addEventListener('scroll', handleScroll, { passive: true });
         return () => window.removeEventListener('scroll', handleScroll);
     }, []);
 
     const navLinks = [
-        { name: 'Home', href: '#hero' },
-        { name: 'Services', href: '#services' },
-        { name: 'About', href: '#about' },
-        { name: 'Pricing', href: '#stats' },
-        { name: 'Contact', href: '#contact' },
+        { name: 'Home', href: '/', isHash: true, target: 'hero' },
+        { name: 'Services', href: '/', isHash: true, target: 'services' },
+        { name: 'About', href: '/', isHash: true, target: 'about' },
+        { name: 'Pricing', href: '/pricing', isHash: false },
+        { name: 'Contact', href: '/', isHash: true, target: 'contact' },
     ];
 
-    const handleNavClick = (e, href) => {
+    const handleNavClick = (e, link) => {
         e.preventDefault();
         setIsMobileMenuOpen(false);
 
-        // Give the mobile menu a tiny moment to start closing
-        setTimeout(() => {
-            const targetId = href.replace('#', '');
-            const element = document.getElementById(targetId);
-
-            if (element) {
-                const headerOffset = 80;
-                const elementPosition = element.getBoundingClientRect().top;
-                const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
-
-                window.scrollTo({
-                    top: offsetPosition,
-                    behavior: 'smooth'
-                });
+        if (link.isHash) {
+            if (location.pathname !== '/') {
+                navigate('/');
+                // Small delay to allow home page to mount
+                setTimeout(() => {
+                    scrollToElement(link.target);
+                }, 100);
+            } else {
+                scrollToElement(link.target);
             }
-        }, 150); // Sufficient delay for UI to stabilize
+        } else {
+            navigate(link.href);
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+    };
+
+    const scrollToElement = (id) => {
+        const element = document.getElementById(id);
+        if (element) {
+            const headerOffset = 80;
+            const elementPosition = element.getBoundingClientRect().top;
+            const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+
+            window.scrollTo({
+                top: offsetPosition,
+                behavior: 'smooth'
+            });
+        }
     };
 
     return (
-        <nav className={`fixed top-0 left-0 w-full z-[100] transition-all duration-300 ${isScrolled ? 'bg-white/80 backdrop-blur-lg py-3 shadow-sm border-b border-slate-100' : 'bg-transparent py-5'}`}>
+        <nav className={`fixed top-0 left-0 w-full z-[100] transition-[background-color,border-color,box-shadow] duration-200 ease-out ${isScrolled || location.pathname !== '/' ? 'bg-white border-b border-slate-200/60 shadow-sm' : 'bg-transparent'} py-3`}>
             <div className="container mx-auto px-4 md:px-8 flex justify-between items-center">
-                <div
-                    onClick={(e) => handleNavClick(e, '#hero')}
+                <Link
+                    to="/"
+                    onClick={(e) => handleNavClick(e, { isHash: true, target: 'hero' })}
                     className="flex items-center gap-2 group cursor-pointer"
                 >
                     <div className="p-2 bg-accent rounded-lg group-hover:rotate-12 transition-transform shadow-md shadow-accent/20">
@@ -57,7 +78,7 @@ const Navbar = () => {
                     <span className="text-2xl font-bold font-outfit tracking-tight text-slate-900">
                         Anshu<span className="text-accent">Travels</span>
                     </span>
-                </div>
+                </Link>
 
                 {/* Desktop Links */}
                 <div className="hidden md:flex items-center gap-8">
@@ -65,14 +86,14 @@ const Navbar = () => {
                         <a
                             key={link.name}
                             href={link.href}
-                            onClick={(e) => handleNavClick(e, link.href)}
-                            className="nav-link"
+                            onClick={(e) => handleNavClick(e, link)}
+                            className={`nav-link ${location.pathname === link.href && !link.isHash ? 'text-accent' : ''}`}
                         >
                             {link.name}
                         </a>
                     ))}
                     <button
-                        onClick={(e) => handleNavClick(e, '#hero')}
+                        onClick={(e) => handleNavClick(e, { isHash: true, target: 'hero' })}
                         className="flex items-center gap-2 px-5 py-2 bg-slate-50 hover:bg-slate-100 border border-slate-200 rounded-full transition-all text-slate-900"
                     >
                         <Phone size={18} className="text-accent" />
@@ -103,15 +124,15 @@ const Navbar = () => {
                                 <a
                                     key={link.name}
                                     href={link.href}
-                                    className="text-lg font-bold text-slate-700 hover:text-accent transition-colors"
-                                    onClick={(e) => handleNavClick(e, link.href)}
+                                    className={`text-lg font-bold ${location.pathname === link.href && !link.isHash ? 'text-accent' : 'text-slate-700'} hover:text-accent transition-colors`}
+                                    onClick={(e) => handleNavClick(e, link)}
                                 >
                                     {link.name}
                                 </a>
                             ))}
                             <div className="pt-4 border-t border-slate-100">
                                 <button
-                                    onClick={(e) => handleNavClick(e, '#hero')}
+                                    onClick={(e) => handleNavClick(e, { isHash: true, target: 'hero' })}
                                     className="w-full flex justify-center items-center gap-2 py-4 bg-accent text-white font-bold rounded-xl shadow-lg shadow-accent/20"
                                 >
                                     <Phone size={20} />

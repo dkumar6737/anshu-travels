@@ -40,6 +40,10 @@
 }
 
 @layer base {
+  html {
+    overflow-x: hidden;
+  }
+
   body {
     @apply bg-primary text-slate-900 font-inter antialiased;
   }
@@ -64,11 +68,11 @@
   }
 
   .glass-card {
-    background-color: rgba(255, 255, 255, 0.7);
-    backdrop-filter: blur(16px);
+    background-color: #FFFFFF;
     border: 1px solid rgba(0, 0, 0, 0.05);
-    box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.05);
     border-radius: 1.25rem;
+    will-change: transform, opacity;
   }
 
   .nav-link {
